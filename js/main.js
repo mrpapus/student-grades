@@ -84,16 +84,34 @@ function removeLastGrade() {
 function displayStats() {
   // Determine the maximum grade, minimum grade and average grade.
   // Output the results.
-  outputEl.innerHTML = "Stats: max, min, average";
+  let average = 0;
+  for (let n = 0; n < grades.length; n++) {
+    average += grades[n];
+  }
+  let ave = average / grades.length;
+  outputEl.innerHTML = `Stats:${Math.max(...grades)},${Math.min(
+    ...grades
+  )}, ${ave}`;
 }
 
 function countBelow50() {
   // Count how many grades are below 50.  Output the result.
-  outputEl.innerHTML = "Count grades below 50";
+  let count = 0;
+  for (let n = 0; n < grades.length; n++) {
+    if (grades[n] < 50) {
+      count++;
+    }
+  }
+  outputEl.innerHTML = count + " grades are below 50";
 }
 
 function lowGradesTo50() {
   // Change all grades that are below 50 to be equal to 50.
+  for (let n = 0; n < grades.length; n++) {
+    if (grades[n] < 50) {
+      grades[n] = 50;
+    }
+  }
   outputEl.innerHTML = "Change low grades to 50";
 }
 
@@ -126,7 +144,7 @@ function removeBelow50() {
   for (let n = 0; n < grades.length; n++) {
     if (grades[n] < 50) {
       grades.splice(n, 1);
-      console.log(grades);
+      n -= 1;
     }
   }
   outputEl.innerHTML = "Remove all grades below 50";
